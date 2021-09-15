@@ -11,6 +11,7 @@ void	do_swap(t_elem *stack)
 
 	if(stack && stack->next)
 	{
+		printf ("DO SWAP\n");
 		valueAux = stack->value;
 		secondElem = stack->next;
 
@@ -29,6 +30,7 @@ void	do_push(t_elem **stack1, t_elem **stack2)
 
 	if(*stack2)
 	{
+		printf ("DO PUSH\n");
 		ElemAux = (*stack2)->next;
 		ft_stackadd_front(stack1, ft_stacknew((*stack2)->value));
 		free(*stack2);
@@ -49,6 +51,7 @@ t_elem	*do_rotate(t_elem *stack)
 
 	if(stack)
 	{
+		printf ("DO ROTATE\n");
 		ElemAux = ft_stacklast(stack);
 		ElemAux->next = stack;
 		ElemAux2 = stack->next;
@@ -69,6 +72,7 @@ t_elem	*do_reverse_rotate(t_elem *stack)
 
 	if(stack)
 	{
+		printf ("DO REVERSE ROTATE\n");
 		ElemAux = ft_stacklast(stack);
 		ElemAux->next = stack;
 		while(stack->next != ElemAux)

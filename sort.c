@@ -61,28 +61,31 @@ void countingSort(int *array, int size, int place)
 void sortstack(t_elem *stack, int size)
 {
 	int	*array;
+	int max;
+	int place;
 
 	array = malloc(size + 1);
-	// Get maximum element
-	int max = check_for_max(stack, array);
+	max = check_for_max(stack, array);
 
-	// Apply counting sort to sort elements based on place value.
-	for (int place = 1; max / place > 0; place *= 10)
+	place = 1;
+	while (max / place > 0)
+	{
 		countingSort(array, size, place);
+		place *= 10;
+	}
 
-	int count;
+	place = 0;
 	while (stack->next)
 	{
-		count = 0;
-		while (array[count] != stack->value)
-			count++;
-		stack->index = count;		
+		place = 0;
+		while (array[place] != stack->value)
+			place++;
+		stack->index = place;		
 		stack = stack->next;
 	}
-	count = 0;
-	while (array[count] != stack->value)
-		count++;
-	stack->index = count;
-
-	
+	place = 0;
+	while (array[place] != stack->value)
+		place++;
+	stack->index = place;
+	free(array);
 }

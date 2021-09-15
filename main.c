@@ -37,6 +37,12 @@ int main (int argc, char *argv[])
 			printf("-----------------------------\n");
 			sortstack(stacka, size);
 			ft_stackiter(stacka);
+			if (size <= 5)
+			{
+				order_small(&stacka, size);
+			}
+			printf("-----------------------------\n");
+			ft_stackiter(stacka);
 			
 		}
 		else

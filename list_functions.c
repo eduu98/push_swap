@@ -26,6 +26,17 @@ t_elem	*ft_stacklast(t_elem *stack)
 	}
 	return (stack);
 }
+t_elem	*ft_stackprev(t_elem *stack, t_elem *actual)
+{
+	if (stack && stack != actual)
+	{
+		while (stack->next != actual)
+		{
+			stack = stack->next;
+		}
+	}
+	return (stack);
+}
 void	ft_stackadd_back(t_elem **stack, t_elem *new)
 {
 	t_elem	*last;

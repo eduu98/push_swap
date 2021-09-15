@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRC = main.c actions.c list_functions.c args_checks.c sort.c
+SRC = main.c actions.c list_functions.c args_checks.c sort.c order_small.c find_moves.c
 OBJ_DIR = _objFiles/
 OBJ_SRC = $(SRC:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_SRC))
