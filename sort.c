@@ -28,12 +28,14 @@ void countingSort(int *array, int size, int place)
 {
 	int output[size + 1];
 	int max = (array[0] / place) % 10;
+	char *count;
 	for (int i = 1; i < size; i++)
 	{
 		if (((array[i] / place) % 10) > max)
 			max = array[i];
 	}
-	int count[max + 1];
+
+	count = malloc(max + 1);
 
 	for (int i = 0; i < max; ++i)
 		count[i] = 0;
@@ -53,6 +55,7 @@ void countingSort(int *array, int size, int place)
 		count[(array[i] / place) % 10]--;
 	}
 
+	free(count);
 	for (int i = 0; i < size; i++)
 		array[i] = output[i];
 }

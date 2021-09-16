@@ -25,11 +25,11 @@ int	ft_stackiter(t_elem *stack)
 int main (int argc, char *argv[])
 {
 	t_elem	*stacka;
+	t_elem	*stackb;
 	int size;
 
 	if (ft_do_checks(argc, argv, &stacka))
 	{
-		// *stacka = (t_elem){0, 0, NULL};
 		if (stacka)
 		{
 			printf("Todo Correcto\n");
@@ -37,9 +37,10 @@ int main (int argc, char *argv[])
 			printf("-----------------------------\n");
 			sortstack(stacka, size);
 			ft_stackiter(stacka);
+			printf("-----------------------------\n");
 			if (size <= 5)
 			{
-				order_small(&stacka, size);
+				order_small(&stacka, &stackb, size);
 			}
 			printf("-----------------------------\n");
 			ft_stackiter(stacka);

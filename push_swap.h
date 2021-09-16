@@ -26,7 +26,7 @@ t_elem	*do_reverse_rotate(t_elem *stack);
 int		ft_do_checks(int argc, char *argv[], t_elem **stack);
 
 void	sortstack(t_elem *stack, int size);
-void	order_small(t_elem **stack, int size);
+void	order_small(t_elem **stacka, t_elem **stackb, int size);
 
 int		moves_to_end(t_elem *stack, int flag, int max);
 
