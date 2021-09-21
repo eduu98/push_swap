@@ -4,9 +4,9 @@
 ** Calculates number of moves to top of stack
 */
 
-int	moves_to_start(stack *stk, int flag, int max)
+int	moves_to_start(t_stack *stk, int flag, int max)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		element;
 	int		moves;
 
@@ -29,9 +29,9 @@ int	moves_to_start(stack *stk, int flag, int max)
 ** Calculates moves to bottom of stack
 */
 
-int	moves_to_end(stack *stk, int flag, int max)
+int	moves_to_end(t_stack *stk, int flag, int max)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		element;
 	int		moves;
 
@@ -50,7 +50,7 @@ int	moves_to_end(stack *stk, int flag, int max)
 	return(moves);
 }
 
-void	moves_smallest(stack *stk, int *s_rot, int *s_revrot, int max)
+void	moves_smallest(t_stack *stk, int *s_rot, int *s_revrot, int max)
 {
 	if (stk)
 	{
@@ -63,7 +63,7 @@ void	moves_smallest(stack *stk, int *s_rot, int *s_revrot, int max)
 	}
 }
 
-void	moves_biggest(stack *stk, int *b_rot, int *b_revrot, int max)
+void	moves_biggest(t_stack *stk, int *b_rot, int *b_revrot, int max)
 {
 	if (stk)
 	{
@@ -82,13 +82,14 @@ void	moves_biggest(stack *stk, int *b_rot, int *b_revrot, int max)
 ** either by rotating to the top or reverse rotating to the end.
 */
 
-move	*find_moves(stack *stk, int size)
+t_moves	*find_moves(t_stack *stk, int size)
 {
-	move	*moves;
+	t_moves	*moves;
 
-
+	*moves = (t_moves){0, 0, 0, 0};
 	moves_smallest(stk, &moves->small_rotate, &moves->small_revrotate, size - 1);
 	moves_biggest(stk, &moves->big_rotate, &moves->big_revrotate, size - 1);
+	printf("CUALO\n");
 	if (moves->big_rotate != -1 && (moves->big_rotate >= moves->small_rotate &&
 		moves->big_rotate >= moves->small_revrotate))
 		moves->big_rotate = -1;

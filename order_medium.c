@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 16:41:51 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:00:41 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /**
  * Move to the other stack the half of the numbers
  */
-void	push_median(stack **stacka, stack **stackb, int split, int half)
+void	push_median(t_stack **stacka, t_stack **stackb, int split, int half)
 {
-	stack	*stackaux;
-	stack	*stack_a_end;
+	t_stack	*stackaux;
+	t_stack	*stack_a_end;
 	int		flag;
 
 	stackaux = *stacka;
@@ -44,7 +44,7 @@ void	push_median(stack **stacka, stack **stackb, int split, int half)
 ** Pushes biggest or smallest from stack B to stack A, in sorted order
 */
 
-void	rotate_and_push_to_a(stack **stka, stack **stkb, move *moves, int *rotates)
+void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb, t_moves *moves, int *rotates)
 {
 	if (moves->small_rotate >= 0)
 		while (moves->small_rotate--)
@@ -65,15 +65,16 @@ void	rotate_and_push_to_a(stack **stka, stack **stkb, move *moves, int *rotates)
 		*rotates++;
 }
 
-int	push_big_small(stack **stka, stack **stkb, stack *stkb_end, int half, move *moves)
+int	push_big_small(t_stack **stka, t_stack **stkb, t_stack *stkb_end, int half, t_moves *moves)
 {
-	stack	*stkaux;
+	t_stack	*stkaux;
 	int		rotates;
 
 	stkaux = *stkb;
 	rotates = 0;
 	while (1)
 	{
+		printf("HOLA\n");
 		while (stkaux->index != 0 && stkaux->index != half)
 			stkaux = stkaux->next;
 		if (stkaux->index == 0 || stkaux->index == half)
@@ -94,12 +95,12 @@ int	push_big_small(stack **stka, stack **stkb, stack *stkb_end, int half, move *
 /**
  * Order a stack of 100 or less numbers
  */
-void	order_medium(stack **stacka, stack **stackb, int size)
+void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 {
 	int		split;
 	int		half;
 	int		rotates;
-	move	*moves;
+	t_moves	*moves;
 
 	rotates = 0;
 	split = 1;
@@ -107,15 +108,14 @@ void	order_medium(stack **stacka, stack **stackb, int size)
 	while (*stacka)
 	{
 		push_median(stacka, stackb, split, half);
-		ft_stackiter(*stackb);
 		while (*stackb)
 		{
-			printf("HOLA\n");
 			moves = find_moves(*stackb, size);
 			if (stackb && (moves->small_rotate >= 0 || moves->small_revrotate >= 0
 				|| moves->big_rotate >= 0 || moves->big_revrotate >= 0))
 				rotates += push_big_small(stacka, stackb, ft_stacklast(*stackb), half, moves);
 		}
+		
 		while (--rotates)
 			*stacka = do_rotate(*stacka);
 			

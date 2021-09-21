@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-stack	*ft_stacknew(int content, int index)
+t_stack	*ft_stacknew(int content, int index)
 {
-	stack	*nodo;
+	t_stack	*nodo;
 
-	nodo = malloc(sizeof(stack));
+	nodo = malloc(sizeof(t_stack));
 	if (nodo == NULL)
 		return (NULL);
 	else
@@ -15,7 +15,7 @@ stack	*ft_stacknew(int content, int index)
 	}
 	return (nodo);
 }
-stack	*ft_stacklast(stack *stck)
+t_stack	*ft_stacklast(t_stack *stck)
 {
 	if (stck)
 	{
@@ -26,7 +26,7 @@ stack	*ft_stacklast(stack *stck)
 	}
 	return (stck);
 }
-stack	*ft_stackprev(stack *stck, stack *actual)
+t_stack	*ft_stackprev(t_stack *stck, t_stack *actual)
 {
 	if (stck && stck != actual)
 	{
@@ -37,9 +37,9 @@ stack	*ft_stackprev(stack *stck, stack *actual)
 	}
 	return (stck);
 }
-void	ft_stackadd_back(stack **stck, stack *new)
+void	ft_stackadd_back(t_stack **stck, t_stack *new)
 {
-	stack	*last;
+	t_stack	*last;
 
 	if (*stck)
 	{
@@ -49,7 +49,7 @@ void	ft_stackadd_back(stack **stck, stack *new)
 	else
 		*stck = new;
 }
-void	ft_stackadd_front(stack **alst, stack *new)
+void	ft_stackadd_front(t_stack **alst, t_stack *new)
 {
 	new->next = *alst;
 	*alst = new;

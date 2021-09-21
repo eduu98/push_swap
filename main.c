@@ -6,14 +6,14 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:41 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 15:46:23 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:59:36 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int	ft_stackiter(stack *stk)
+int	ft_stackiter(t_stack *stk)
 {
 	int count;
 
@@ -36,8 +36,8 @@ int	ft_stackiter(stack *stk)
 
 int main (int argc, char *argv[])
 {
-	stack	*stacka;
-	stack	*stackb;
+	t_stack	*stacka;
+	t_stack	*stackb;
 	int size;
 
 	if (ft_do_checks(argc, argv, &stacka))

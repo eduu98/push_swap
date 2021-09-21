@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:22 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 12:48:09 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:06:46 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * Compare if the first element is bigger than the second
  * and, if so, make a  swap
  */
-void	order_two(stack **stack)
+void	order_two(t_stack **stack)
 {
 	if ((*stack)->index > (*stack)->next->index)
 		do_swap(*stack);
@@ -28,7 +28,7 @@ void	order_two(stack **stack)
  * Put the biggest number at the end
  * and then check the first two numbers
  */
-void	order_three(stack **stack, int size)
+void	order_three(t_stack **stack, int size)
 {
 	int	big_revrotate;
 
@@ -44,7 +44,7 @@ void	order_three(stack **stack, int size)
  * Put the biggest number at the end
  * and then check the first three numbers
  */
-void	order_four(stack **stacka, stack **stackb, int size)
+void	order_four(t_stack **stacka, t_stack **stackb, int size)
 {
 	while ((*stacka)->index != 0)
 		*stacka = do_rotate(*stacka);
@@ -58,10 +58,10 @@ void	order_four(stack **stacka, stack **stackb, int size)
  * Put the two first numbers in stack b
  * and then check the first three numbers
  */
-void	order_five(stack **stacka, stack **stackb, int size)
+void	order_five(t_stack **stacka, t_stack **stackb, int size)
 {
-	stack	*stack_a_end;
-	stack	*tmp;
+	t_stack	*stack_a_end;
+	t_stack	*tmp;
 	int		end;
 
 	end = 0;
@@ -86,7 +86,7 @@ void	order_five(stack **stacka, stack **stackb, int size)
 /**
  * Order a stack of five or less numbers
  */
-void	order_small(stack **stacka, stack **stackb, int size)
+void	order_small(t_stack **stacka, t_stack **stackb, int size)
 {
 	if (size == 2)
 		order_two(stacka);

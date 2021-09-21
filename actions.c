@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:03:21 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 16:24:33 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:57:55 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
  * Swap the first 2 elements at the top of the stack.
  * Do nothing if there is only one or no elements.
  */
-void	do_swap(stack *stk)
+void	do_swap(t_stack *stk)
 {
 	int		valueAux;
 	int		indexAux;
-	stack	*secondElem;
+	t_stack	*secondElem;
 
 	if(stk && stk->next)
 	{
@@ -40,9 +40,9 @@ void	do_swap(stack *stk)
  * take the first element at the top of stack 2 and put it at the top of stack 1.
  * Do nothing if stack 2 is empty.
  */
-void	do_push(stack **stk1, stack **stk2)
+void	do_push(t_stack **stk1, t_stack **stk2)
 {
-	stack	*ElemAux;
+	t_stack	*ElemAux;
 
 	if(*stk2)
 	{
@@ -60,10 +60,10 @@ void	do_push(stack **stk1, stack **stk2)
  * The first element becomes the last one.
  * Returns the stack modified
  */
-stack	*do_rotate(stack *stk)
+t_stack	*do_rotate(t_stack *stk)
 {
-	stack	*ElemAux;
-	stack	*ElemAux2;
+	t_stack	*ElemAux;
+	t_stack	*ElemAux2;
 
 	if(stk)
 	{
@@ -82,9 +82,9 @@ stack	*do_rotate(stack *stk)
  * becomes the first one
  * Returns the stack modified
  */
-stack	*do_reverse_rotate(stack *stk)
+t_stack	*do_reverse_rotate(t_stack *stk)
 {
-	stack	*ElemAux;
+	t_stack	*ElemAux;
 
 	if(stk)
 	{

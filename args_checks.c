@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:42 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 12:48:09 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:04:42 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_validargs(char *args)
 /**
  * Manage more than two args
  */
-int	ft_various_args(int argc, char *argv[], stack **stack)
+int	ft_various_args(int argc, char *argv[], t_stack **stack)
 {
 	int	count;
 
@@ -59,7 +59,7 @@ int	ft_various_args(int argc, char *argv[], stack **stack)
  * Manage the arguments of the program and return them
  * in the array given on the third argument
  */
-int	ft_do_checks(int argc, char *argv[], stack **stack)
+int	ft_do_checks(int argc, char *argv[], t_stack **stack)
 {
 	if (argc < 2)
 		return (ft_print_error());

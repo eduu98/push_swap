@@ -6,14 +6,14 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 14:14:39 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:00:10 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int	check_for_max(stack *stk, int *array)
+int	check_for_max(t_stack *stk, int *array)
 {
 	int	max;
 	int	i;
@@ -75,7 +75,7 @@ void	counting_sort(int *array, int size, int place)
 }
 
 // Main function to implement radix sort
-void	sortstack(stack *stk, int size)
+void	sortstack(t_stack *stk, int size)
 {
 	int	*array;
 	int	max;
