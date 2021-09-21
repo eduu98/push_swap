@@ -1,94 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
+/*   Updated: 2021/09/21 14:14:39 by ecruz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
-int check_for_max(t_elem *stack, int *array)
+int	check_for_max(stack *stk, int *array)
 {
-	int max;
+	int	max;
+	int	i;
+	int	*aux;
 
-	if (stack)
+	aux = array;
+	if (stk)
 	{
-		max = stack->value;
-		while (stack->next)
+		max = stk->value;
+		while (stk->next)
 		{
-			*array = stack->value;
-			if (max < stack->value)
-				max = stack->value;
-			stack = stack->next;
+			*array = stk->value;
+			if (max < stk->value)
+				max = stk->value;
+			stk = stk->next;
 			array++;
 		}
-		if (max < stack->value)
-			max = stack->value;
-		*array = stack->value;
+		*array = stk->value;
+		if (max < stk->value)
+			max = stk->value;
+		array++;
+		*array = '\0';
 	}
 	return (max);
 }
 
 // Using counting sort to sort the elements in the basis of significant places
-void countingSort(int *array, int size, int place)
+void	counting_sort(int *array, int size, int place)
 {
-	int output[size + 1];
-	int max = (array[0] / place) % 10;
-	char *count;
-	for (int i = 1; i < size; i++)
+	int	output[size];
+	int	count[10] = {0};
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
-		if (((array[i] / place) % 10) > max)
-			max = array[i];
-	}
-
-	count = malloc(max + 1);
-
-	for (int i = 0; i < max; ++i)
-		count[i] = 0;
-
-	// Calculate count of elements
-	for (int i = 0; i < size; i++)
 		count[(array[i] / place) % 10]++;
-
-	// Calculate cumulative count
-	for (int i = 1; i < 10; i++)
+		i++;
+	}
+	i = 1;
+	while (i < 10)
+	{
 		count[i] += count[i - 1];
-
-	// Place the elements in sorted order
-	for (int i = size - 1; i >= 0; i--)
+		i++;
+	}
+	i = size - 1;
+	while (i >= 0)
 	{
 		output[count[(array[i] / place) % 10] - 1] = array[i];
 		count[(array[i] / place) % 10]--;
+		i--;
 	}
-
-	free(count);
-	for (int i = 0; i < size; i++)
+	i = 0;
+	while (i < size)
+	{
 		array[i] = output[i];
+		i++;
+	}
 }
 
 // Main function to implement radix sort
-void sortstack(t_elem *stack, int size)
+void	sortstack(stack *stk, int size)
 {
 	int	*array;
-	int max;
-	int place;
+	int	max;
+	int	place;
 
 	array = malloc(size + 1);
-	max = check_for_max(stack, array);
-
+	max = check_for_max(stk, array);
 	place = 1;
 	while (max / place > 0)
 	{
-		countingSort(array, size, place);
+		counting_sort(array, size, place);
 		place *= 10;
 	}
-
-	place = 0;
-	while (stack->next)
+	while (stk->next)
 	{
 		place = 0;
-		while (array[place] != stack->value)
+		while (array[place] != stk->value)
 			place++;
-		stack->index = place;		
-		stack = stack->next;
+		stk->index = place;
+		stk = stk->next;
 	}
 	place = 0;
-	while (array[place] != stack->value)
+	while (array[place] != stk->value)
 		place++;
-	stack->index = place;
+	stk->index = place;
 	free(array);
 }

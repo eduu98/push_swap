@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRC = main.c actions.c list_functions.c args_checks.c sort.c order_small.c find_moves.c
+SRC = main.c actions.c list_functions.c args_checks.c sort.c order_small.c find_moves.c order_medium.c
 OBJ_DIR = _objFiles/
 OBJ_SRC = $(SRC:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_SRC))
@@ -56,3 +56,16 @@ norm: $(SRC)
 	@echo $(GRAY) ""
 	@norminette $(SRC) *.h
 	@echo $(NONE)$(GREEN) "\n     NORM OK" $(NONE)
+
+
+# --- TEST ---
+n = 0
+exe: all
+	@if [ $(n) -le 0 ]; then \
+		echo "\033[31m     MAKE ERROR"; \
+		echo "Usage: \033[0;3;4m< make exe n=x >\033[0;31m. x is the length of the number list and must be above 0."; \
+	else \
+		ARG=$$(seq -$(n) $(n) | sort -R | head -n $(n) | tr '\n' ' '); \
+		echo $(YELLOW) "     -Using $(n) numbers..." $(NONE); \
+		./push_swap $$ARG; \
+	fi;

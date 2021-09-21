@@ -1,55 +1,55 @@
 #include "push_swap.h"
 
-t_elem	*ft_stacknew(int content)
+stack	*ft_stacknew(int content, int index)
 {
-	t_elem	*nodo;
+	stack	*nodo;
 
-	nodo = malloc(sizeof(t_elem));
+	nodo = malloc(sizeof(stack));
 	if (nodo == NULL)
 		return (NULL);
 	else
 	{
 		nodo->value = content;
-		nodo->index = 0;
+		nodo->index = index;
 		nodo->next = NULL;
 	}
 	return (nodo);
 }
-t_elem	*ft_stacklast(t_elem *stack)
+stack	*ft_stacklast(stack *stck)
 {
-	if (stack)
+	if (stck)
 	{
-		while (stack->next)
+		while (stck->next)
 		{
-			stack = stack->next;
+			stck = stck->next;
 		}
 	}
-	return (stack);
+	return (stck);
 }
-t_elem	*ft_stackprev(t_elem *stack, t_elem *actual)
+stack	*ft_stackprev(stack *stck, stack *actual)
 {
-	if (stack && stack != actual)
+	if (stck && stck != actual)
 	{
-		while (stack->next != actual)
+		while (stck->next != actual)
 		{
-			stack = stack->next;
+			stck = stck->next;
 		}
 	}
-	return (stack);
+	return (stck);
 }
-void	ft_stackadd_back(t_elem **stack, t_elem *new)
+void	ft_stackadd_back(stack **stck, stack *new)
 {
-	t_elem	*last;
+	stack	*last;
 
-	if (*stack)
+	if (*stck)
 	{
-		last = ft_stacklast(*stack);
+		last = ft_stacklast(*stck);
 		last->next = new;
 	}
 	else
-		*stack = new;
+		*stck = new;
 }
-void	ft_stackadd_front(t_elem **alst, t_elem *new)
+void	ft_stackadd_front(stack **alst, stack *new)
 {
 	new->next = *alst;
 	*alst = new;

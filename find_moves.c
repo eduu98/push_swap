@@ -4,16 +4,16 @@
 ** Calculates number of moves to top of stack
 */
 
-int	moves_to_start(t_elem *stack, int flag, int max)
+int	moves_to_start(stack *stk, int flag, int max)
 {
-	t_elem	*tmp;
+	stack	*tmp;
 	int		element;
 	int		moves;
 
 	moves = 0;
-	if (stack)
+	if (stk)
 	{
-		tmp = stack;
+		tmp = stk;
 		element = (flag == 1) ? 0 : max;
 		moves++;
 		while (tmp->index != element)
@@ -29,33 +29,33 @@ int	moves_to_start(t_elem *stack, int flag, int max)
 ** Calculates moves to bottom of stack
 */
 
-int	moves_to_end(t_elem *stack, int flag, int max)
+int	moves_to_end(stack *stk, int flag, int max)
 {
-	t_elem	*tmp;
+	stack	*tmp;
 	int		element;
 	int		moves;
 
 	moves = 0;
-	if (stack)
+	if (stk)
 	{
-		tmp = ft_stacklast(stack);
+		tmp = ft_stacklast(stk);
 		element = (flag == 1) ? 0 : max;
 		while (tmp->index != element)
 		{
 			moves++;
-			tmp = ft_stackprev(stack, tmp);
+			tmp = ft_stackprev(stk, tmp);
 		}
 		moves++;
 	}
 	return(moves);
 }
 
-void	moves_smallest(t_elem *stack, int *s_rot, int *s_revrot, int max)
+void	moves_smallest(stack *stk, int *s_rot, int *s_revrot, int max)
 {
-	if (stack)
+	if (stk)
 	{
-		*s_rot = moves_to_start(stack, 1, max);
-		*s_revrot = moves_to_end(stack, 1, max);
+		*s_rot = moves_to_start(stk, 1, max);
+		*s_revrot = moves_to_end(stk, 1, max);
 		if (*s_rot <= *s_revrot)
 			*s_revrot = -1;
 		else
@@ -63,12 +63,12 @@ void	moves_smallest(t_elem *stack, int *s_rot, int *s_revrot, int max)
 	}
 }
 
-void	moves_biggest(t_elem *stack, int *b_rot, int *b_revrot, int max)
+void	moves_biggest(stack *stk, int *b_rot, int *b_revrot, int max)
 {
-	if (stack)
+	if (stk)
 	{
-		*b_rot = moves_to_start(stack, 2, max);
-		*b_revrot = moves_to_end(stack, 2, max);
+		*b_rot = moves_to_start(stk, 2, max);
+		*b_revrot = moves_to_end(stk, 2, max);
 		if (*b_rot <= *b_revrot)
 			*b_revrot = -1;
 		else
@@ -82,32 +82,28 @@ void	moves_biggest(t_elem *stack, int *b_rot, int *b_revrot, int max)
 ** either by rotating to the top or reverse rotating to the end.
 */
 
-void		find_moves(t_elem *stack, char stack_name, int size)
+move	*find_moves(stack *stk, int size)
 {
-	int small_rotate;
-	int big_rotate;
-	int small_revrotate;
-	int big_revrotate;
+	move	*moves;
 
 
-	moves_smallest(stack, &small_rotate, &small_revrotate, size - 1);
-	moves_biggest(stack, &big_rotate, &big_revrotate, size - 1);
-	if (big_rotate != -1 && (big_rotate >= small_rotate &&
-		big_rotate >= small_revrotate))
-		big_rotate = -1;
-	else if (big_revrotate != -1 && (big_revrotate >= small_rotate &&
-		big_revrotate >= small_revrotate))
-		big_revrotate = -1;
-	else if (small_rotate != -1 && (small_rotate >= big_rotate &&
-		small_rotate >= big_revrotate))
-		small_rotate = -1;
-	else if (small_revrotate != -1 && (small_revrotate >= big_rotate &&
-		small_revrotate >= big_revrotate))
-		small_revrotate = -1;
-	/*
-	if (small_rotate != -1 || small_revrotate != -1)
-		SMALL_FLAG = 1;
-	else if (big_rotate != -1 || big_revrotate != -1)
-		BIG_FLAG = 1;
-	*/
+	moves_smallest(stk, &moves->small_rotate, &moves->small_revrotate, size - 1);
+	moves_biggest(stk, &moves->big_rotate, &moves->big_revrotate, size - 1);
+	if (moves->big_rotate != -1 && (moves->big_rotate >= moves->small_rotate &&
+		moves->big_rotate >= moves->small_revrotate))
+		moves->big_rotate = -1;
+	else if (moves->big_revrotate != -1 && (moves->big_revrotate >= moves->small_rotate &&
+		moves->big_revrotate >= moves->small_revrotate))
+		moves->big_revrotate = -1;
+	else if (moves->small_rotate != -1 && (moves->small_rotate >= moves->big_rotate &&
+		moves->small_rotate >= moves->big_revrotate))
+		moves->small_rotate = -1;
+	else if (moves->small_revrotate != -1 && (moves->small_revrotate >= moves->big_rotate &&
+		moves->small_revrotate >= moves->big_revrotate))
+		moves->small_revrotate = -1;
+	if (moves->small_rotate != -1 || moves->small_revrotate != -1)
+		moves->small_flag = 1;
+	else if (moves->big_rotate != -1 || moves->big_revrotate != -1)
+		moves->big_flag = 1;
+	return (moves);
 }

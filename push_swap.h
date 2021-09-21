@@ -5,29 +5,50 @@
 #include "stdio.h"
 # include "Libft/libft.h"
 
-typedef struct s_elem
+typedef struct Stacks
 {
 	int				value;
 	int				index;
-	struct s_elem	*next;
-} t_elem;
+	struct Stacks	*next;
+} stack;
+
+typedef struct Moves
+{
+	int	small_rotate;
+	int	big_rotate;
+	int	small_revrotate;
+	int	big_revrotate;
+	int small_flag;
+	int big_flag;
+} move;
+
+
 /* Stack Basic Functions */
-t_elem	*ft_stacknew(int content);
-t_elem	*ft_stacklast(t_elem *stack);
-t_elem	*ft_stackprev(t_elem *stack, t_elem *actual);
-void	ft_stackadd_back(t_elem **stack, t_elem *new);
-void	ft_stackadd_front(t_elem **alst, t_elem *new);
+stack	*ft_stacknew(int content, int index);
+stack	*ft_stacklast(stack *stk);
+stack	*ft_stackprev(stack *stk, stack *actual);
+void	ft_stackadd_back(stack **stk, stack *new);
+void	ft_stackadd_front(stack **alst, stack *new);
 /* Stack Operations */
-void	do_sa(t_elem *pila);
-void	do_swap(t_elem *stack);
-void	do_push(t_elem **stack1, t_elem **stack2);
-t_elem	*do_rotate(t_elem *stack);
-t_elem	*do_reverse_rotate(t_elem *stack);
-int		ft_do_checks(int argc, char *argv[], t_elem **stack);
+void	do_sa(stack *pila);
+void	do_swap(stack *stk);
+void	do_push(stack **stk1, stack **stk2);
+stack	*do_rotate(stack *stk);
+stack	*do_reverse_rotate(stack *stk);
 
-void	sortstack(t_elem *stack, int size);
-void	order_small(t_elem **stacka, t_elem **stackb, int size);
+/* Moves to make*/
+move	*find_moves(stack *stk, int size);
+int		moves_to_end(stack *stk, int flag, int max);
+int		ft_do_checks(int argc, char *argv[], stack **stk);
 
-int		moves_to_end(t_elem *stack, int flag, int max);
+void	sortstack(stack *stk, int size);
+/* Call Algorithms function */
+void	order_small(stack **stka, stack **stkb, int size);
+void	order_medium(stack **stacka, stack **stackb, int size);
+
+/*!!!!!! PRUEBAS !!!!!!!*/
+int	ft_stackiter(stack *stk);
+
+
 
 #endif
