@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 17:00:41 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/23 14:08:01 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	push_median(t_stack **stacka, t_stack **stackb, int split, int half)
 		else if (stackaux->index == 0)
 			flag = 0;
 		else
-			*stacka = do_rotate(*stacka);
+			*stacka = do_rotate(*stacka);			
 		stackaux = *stacka;
 	}
 }
@@ -65,27 +65,30 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb, t_moves *moves, int *r
 		*rotates++;
 }
 
-int	push_big_small(t_stack **stka, t_stack **stkb, t_stack *stkb_end, int half, t_moves *moves)
+int	push_big_small(t_stack **stka, t_stack **stkb, int half, t_moves *moves)
 {
 	t_stack	*stkaux;
+	t_stack	*stkb_end;
 	int		rotates;
+	int		flag;
 
 	stkaux = *stkb;
+	stkb_end = ft_stacklast(*stkb);
 	rotates = 0;
-	while (1)
+	flag = 1;
+	while (flag)
 	{
-		printf("HOLA\n");
 		while (stkaux->index != 0 && stkaux->index != half)
 			stkaux = stkaux->next;
 		if (stkaux->index == 0 || stkaux->index == half)
 		{
 			rotate_and_push_to_a(stka, stkb, moves, &rotates);
-			break ;
+			flag = 0;
 		}
 		else
 			stkaux = stkaux->next;
 		if (stkaux == stkb_end)
-			break ;
+			flag = 0;
 		stkaux = *stkb;
 	}
 	return (rotates);
@@ -93,32 +96,37 @@ int	push_big_small(t_stack **stka, t_stack **stkb, t_stack *stkb_end, int half, 
 
 
 /**
- * Order a stack of 100 or less numbers
+ * Order a stack of between 6 and 100 
  */
 void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 {
 	int		split;
 	int		half;
 	int		rotates;
-	t_moves	*moves;
+	t_moves	moves;
 
 	rotates = 0;
 	split = 1;
-	half = size / 2;
+	half = (size / 2) - 1;
 	while (*stacka)
 	{
 		push_median(stacka, stackb, split, half);
 		while (*stackb)
 		{
-			moves = find_moves(*stackb, size);
-			if (stackb && (moves->small_rotate >= 0 || moves->small_revrotate >= 0
-				|| moves->big_rotate >= 0 || moves->big_revrotate >= 0))
-				rotates += push_big_small(stacka, stackb, ft_stacklast(*stackb), half, moves);
+			moves = find_moves(*stackb, half);
+			if (stackb && (moves.small_rotate >= 0 || moves.small_revrotate >= 0
+				|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
+				rotates += push_big_small(stacka, stackb, half, &moves);
 		}
-		
+		printf("HOLA %d\n", rotates);
 		while (--rotates)
 			*stacka = do_rotate(*stacka);
-			
+		
+		printf("STACK A\n");
+		ft_stackiter(*stacka);
+		printf("STACK B\n");
+		ft_stackiter(*stackb);
+		
 		split++;
 		if (split == 3)
 			break ;

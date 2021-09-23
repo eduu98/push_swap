@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:22 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 17:06:46 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:44:04 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	order_three(t_stack **stack, int size)
 {
 	int	big_revrotate;
 
-	big_revrotate = moves_to_end(*stack, 2, size - 1);
+	big_revrotate = moves_to_end(*stack, size - 1);
 	if (big_revrotate >= 1)
 		while (big_revrotate-- > 1)
 			*stack = do_reverse_rotate(*stack);

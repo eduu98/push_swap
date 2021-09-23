@@ -9,7 +9,7 @@ typedef struct s_stack
 {
 	int				value;
 	int				index;
-	struct Stacks	*next;
+	struct s_stack	*next;
 } t_stack;
 
 typedef struct s_moves
@@ -37,8 +37,8 @@ t_stack	*do_rotate(t_stack *stk);
 t_stack	*do_reverse_rotate(t_stack *stk);
 
 /* Moves to make*/
-t_moves	*find_moves(t_stack *stk, int size);
-int		moves_to_end(t_stack *stk, int flag, int max);
+t_moves	find_moves(t_stack *stk, int size);
+int		moves_to_end(t_stack *stk, int element);
 int		ft_do_checks(int argc, char *argv[], t_stack **stk);
 
 void	sortstack(t_stack *stk, int size);
