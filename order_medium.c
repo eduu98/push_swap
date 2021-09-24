@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/23 14:08:01 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/24 15:52:12 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb, t_moves *moves, int *r
 		while (moves->big_revrotate--)
 			*stkb = do_reverse_rotate(*stkb);
 	do_push(stka, stkb);
+	
 	if (moves->small_flag)
 		*stka = do_rotate(*stka);
 	if (moves->big_flag || !*stkb)
@@ -77,9 +78,9 @@ int	push_big_small(t_stack **stka, t_stack **stkb, int half, t_moves *moves)
 	rotates = 0;
 	flag = 1;
 	while (flag)
-	{
+	{		
 		while (stkaux->index != 0 && stkaux->index != half)
-			stkaux = stkaux->next;
+			stkaux = stkaux->next;			
 		if (stkaux->index == 0 || stkaux->index == half)
 		{
 			rotate_and_push_to_a(stka, stkb, moves, &rotates);
@@ -94,6 +95,27 @@ int	push_big_small(t_stack **stka, t_stack **stkb, int half, t_moves *moves)
 	return (rotates);
 }
 
+void	find_biggest_smallest(t_stack *stk, int *min, int *max)
+{
+	t_stack		*tmp;
+	t_stack		*end;
+
+	tmp = stk;
+	end = ft_stacklast(stk);
+	*min = stk->index;
+	*max = *min;
+	while (1)
+	{
+		if (tmp->index <= *min)
+			*min = tmp->index;
+		if (tmp->index > *max)
+			*max = tmp->index;
+		if (tmp == end)
+			break ;
+		tmp = tmp->next;
+	}
+}
+
 
 /**
  * Order a stack of between 6 and 100 
@@ -103,6 +125,8 @@ void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 	int		split;
 	int		half;
 	int		rotates;
+	int		max;
+	int		min;
 	t_moves	moves;
 
 	rotates = 0;
@@ -113,20 +137,26 @@ void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 		push_median(stacka, stackb, split, half);
 		while (*stackb)
 		{
-			moves = find_moves(*stackb, half);
+			find_biggest_smallest(*stackb, &min, &max);
+			printf("MAX %d MIN %d\n", max, min);
+			printf("STACK A\n");
+			ft_stackiter(*stacka);
+			printf("STACK B\n");
+			ft_stackiter(*stackb);
+			moves = find_moves(*stackb, min, max);
 			if (stackb && (moves.small_rotate >= 0 || moves.small_revrotate >= 0
 				|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
 				rotates += push_big_small(stacka, stackb, half, &moves);
 		}
+		printf("###################################\n");
 		printf("HOLA %d\n", rotates);
-		while (--rotates)
+		while (rotates--)
 			*stacka = do_rotate(*stacka);
 		
 		printf("STACK A\n");
 		ft_stackiter(*stacka);
 		printf("STACK B\n");
 		ft_stackiter(*stackb);
-		
 		split++;
 		if (split == 3)
 			break ;

@@ -46,12 +46,12 @@ int	moves_to_end(t_stack *stk, int element)
 	return(moves);
 }
 
-void	moves_smallest(t_stack *stk, t_moves *moves, int max)
+void	moves_smallest(t_stack *stk, t_moves *moves, int min)
 {
 	if (stk)
 	{
-		moves->small_rotate = moves_to_start(stk, 0);
-		moves->small_revrotate = moves_to_end(stk, 0);
+		moves->small_rotate = moves_to_start(stk, min);
+		moves->small_revrotate = moves_to_end(stk, min);
 		if (moves->small_rotate <= moves->small_revrotate)
 			moves->small_revrotate = -1;
 		else
@@ -78,12 +78,12 @@ void	moves_biggest(t_stack *stk, t_moves	*moves, int max)
 ** either by rotating to the top or reverse rotating to the end.
 */
 
-t_moves	find_moves(t_stack *stk, int max)
+t_moves	find_moves(t_stack *stk, int min, int max)
 {
 	t_moves	moves;
 
 	moves = (t_moves){0, 0, 0, 0, 0, 0};
-	moves_smallest(stk, &moves, max);
+	moves_smallest(stk, &moves, min);
 	moves_biggest(stk, &moves, max);
 	if (moves.big_rotate != -1 && (moves.big_rotate >= moves.small_rotate &&
 		moves.big_rotate >= moves.small_revrotate))
