@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:42 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 17:04:42 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/27 13:14:35 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_validargs(char *args)
 {
 	while (*args)
 	{
-		if (!ft_isdigit(*args) && *args != ' ')
+		if (!ft_isdigit(*args) && *args != ' ' && *args != '-')
 			return (0);
 		args++;
 	}

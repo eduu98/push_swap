@@ -13,7 +13,6 @@ int	moves_to_start(t_stack *stk, int element)
 	if (stk)
 	{
 		tmp = stk;
-		moves++;
 		while (tmp->index != element)
 		{
 			moves++;

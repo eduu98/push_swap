@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/24 15:52:12 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/27 14:25:39 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	push_median(t_stack **stacka, t_stack **stackb, int split, int half)
 		if (stackaux == stack_a_end)
 			flag = 0;
 		if (split == 1 && stackaux->index <= half)
-			do_push(stackb, stacka);
+			do_push(stackb, stacka, 'b');
 		else if (split == 2 && stackaux->index > half)
-			do_push(stackb, stacka);
+			do_push(stackb, stacka, 'b');
 		else if (stackaux->index == 0)
 			flag = 0;
 		else
-			*stacka = do_rotate(*stacka);			
+			*stacka = do_rotate(*stacka, 'a');
 		stackaux = *stacka;
 	}
 }
@@ -44,29 +44,30 @@ void	push_median(t_stack **stacka, t_stack **stackb, int split, int half)
 ** Pushes biggest or smallest from stack B to stack A, in sorted order
 */
 
-void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb, t_moves *moves, int *rotates)
+void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
+	t_moves *moves, int *rotates)
 {
 	if (moves->small_rotate >= 0)
 		while (moves->small_rotate--)
-			*stkb = do_rotate(*stkb);
+			*stkb = do_rotate(*stkb, 'b');
 	else if (moves->small_revrotate >= 0)
 		while (moves->small_revrotate--)
-			*stkb = do_reverse_rotate(*stkb);
+			*stkb = do_reverse_rotate(*stkb, 'b');
 	else if (moves->big_rotate >= 0)
 		while (moves->big_rotate--)
-			*stkb = do_rotate(*stkb);
+			*stkb = do_rotate(*stkb, 'b');
 	else if (moves->big_revrotate >= 0)
 		while (moves->big_revrotate--)
-			*stkb = do_reverse_rotate(*stkb);
-	do_push(stka, stkb);
-	
+			*stkb = do_reverse_rotate(*stkb, 'b');
+	do_push(stka, stkb, 'a');
 	if (moves->small_flag)
-		*stka = do_rotate(*stka);
+		*stka = do_rotate(*stka, 'a');
 	if (moves->big_flag || !*stkb)
-		*rotates++;
+		(*rotates)++;
 }
 
-int	push_big_small(t_stack **stka, t_stack **stkb, int half, t_moves *moves)
+int	push_big_small(t_stack **stka, t_stack **stkb,
+	int min, int max, t_moves *moves)
 {
 	t_stack	*stkaux;
 	t_stack	*stkb_end;
@@ -79,9 +80,9 @@ int	push_big_small(t_stack **stka, t_stack **stkb, int half, t_moves *moves)
 	flag = 1;
 	while (flag)
 	{		
-		while (stkaux->index != 0 && stkaux->index != half)
-			stkaux = stkaux->next;			
-		if (stkaux->index == 0 || stkaux->index == half)
+		while (stkaux->index != min && stkaux->index != max)
+			stkaux = stkaux->next;
+		if (stkaux->index == min || stkaux->index == max)
 		{
 			rotate_and_push_to_a(stka, stkb, moves, &rotates);
 			flag = 0;
@@ -116,14 +117,12 @@ void	find_biggest_smallest(t_stack *stk, int *min, int *max)
 	}
 }
 
-
 /**
  * Order a stack of between 6 and 100 
  */
 void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 {
 	int		split;
-	int		half;
 	int		rotates;
 	int		max;
 	int		min;
@@ -131,32 +130,19 @@ void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 
 	rotates = 0;
 	split = 1;
-	half = (size / 2) - 1;
 	while (*stacka)
 	{
-		push_median(stacka, stackb, split, half);
+		push_median(stacka, stackb, split, (size / 2) - 1);
 		while (*stackb)
 		{
 			find_biggest_smallest(*stackb, &min, &max);
-			printf("MAX %d MIN %d\n", max, min);
-			printf("STACK A\n");
-			ft_stackiter(*stacka);
-			printf("STACK B\n");
-			ft_stackiter(*stackb);
 			moves = find_moves(*stackb, min, max);
 			if (stackb && (moves.small_rotate >= 0 || moves.small_revrotate >= 0
-				|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
-				rotates += push_big_small(stacka, stackb, half, &moves);
+					|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
+				rotates += push_big_small(stacka, stackb, min, max, &moves);
 		}
-		printf("###################################\n");
-		printf("HOLA %d\n", rotates);
-		while (rotates--)
-			*stacka = do_rotate(*stacka);
-		
-		printf("STACK A\n");
-		ft_stackiter(*stacka);
-		printf("STACK B\n");
-		ft_stackiter(*stackb);
+		while (--rotates)
+			*stacka = do_rotate(*stacka, 'a');
 		split++;
 		if (split == 3)
 			break ;

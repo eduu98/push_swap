@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:22 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/23 11:44:04 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/09/27 12:06:33 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	order_two(t_stack **stack)
 {
 	if ((*stack)->index > (*stack)->next->index)
-		do_swap(*stack);
+		do_swap(*stack, 'a');
 }
 
 /**
@@ -35,7 +35,7 @@ void	order_three(t_stack **stack, int size)
 	big_revrotate = moves_to_end(*stack, size - 1);
 	if (big_revrotate >= 1)
 		while (big_revrotate-- > 1)
-			*stack = do_reverse_rotate(*stack);
+			*stack = do_reverse_rotate(*stack, 'a');
 	order_two(stack);
 }
 
@@ -47,10 +47,10 @@ void	order_three(t_stack **stack, int size)
 void	order_four(t_stack **stacka, t_stack **stackb, int size)
 {
 	while ((*stacka)->index != 0)
-		*stacka = do_rotate(*stacka);
-	do_push(stackb, stacka);
+		*stacka = do_rotate(*stacka, 'a');
+	do_push(stackb, stacka, 'b');
 	order_three(stacka, size);
-	do_push(stacka, stackb);
+	do_push(stacka, stackb, 'a');
 }
 
 /**
@@ -71,16 +71,16 @@ void	order_five(t_stack **stacka, t_stack **stackb, int size)
 		if (*stacka == stack_a_end)
 			end = 1;
 		if ((*stacka)->index < 2)
-			do_push(stackb, stacka);
+			do_push(stackb, stacka, 'b');
 		else
-			*stacka = do_rotate(*stacka);
+			*stacka = do_rotate(*stacka, 'a');
 	}
 	order_three(stacka, size);
 	tmp = (*stackb)->next;
 	if ((*stackb)->index < tmp->index)
-		do_swap(*stackb);
-	do_push(stacka, stackb);
-	do_push(stacka, stackb);
+		do_swap(*stackb, 'b');
+	do_push(stacka, stackb, 'a');
+	do_push(stacka, stackb, 'a');
 }
 
 /**

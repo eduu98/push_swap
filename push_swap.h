@@ -30,11 +30,11 @@ t_stack	*ft_stackprev(t_stack *stk, t_stack *actual);
 void	ft_stackadd_back(t_stack **stk, t_stack *new);
 void	ft_stackadd_front(t_stack **alst, t_stack *new);
 /* Stack Operations */
-void	do_sa(t_stack *pila);
-void	do_swap(t_stack *stk);
-void	do_push(t_stack **stk1, t_stack **stk2);
-t_stack	*do_rotate(t_stack *stk);
-t_stack	*do_reverse_rotate(t_stack *stk);
+void	do_sa(t_stack *pila, char stack_name);
+void	do_swap(t_stack *stk, char stack_name);
+void	do_push(t_stack **stk1, t_stack **stk2, char stack_name);
+t_stack	*do_rotate(t_stack *stk, char stack_name);
+t_stack	*do_reverse_rotate(t_stack *stk, char stack_name);
 
 /* Moves to make*/
 t_moves	find_moves(t_stack *stk, int min, int max);
