@@ -6,11 +6,11 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:22 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/27 12:06:33 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:25:53 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /**
  * Order a stack of two numbers

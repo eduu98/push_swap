@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order_medium.c                                     :+:      :+:    :+:   */
+/*   aux_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/27 14:25:39 by ecruz-go         ###   ########.fr       */
+/*   Created: 2021/10/06 12:09:53 by ecruz-go          #+#    #+#             */
+/*   Updated: 2021/10/06 13:25:44 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-/**
- * Move to the other stack the half of the numbers
- */
-void	push_median(t_stack **stacka, t_stack **stackb, int split, int half)
-{
-	t_stack	*stackaux;
-	t_stack	*stack_a_end;
-	int		flag;
-
-	stackaux = *stacka;
-	stack_a_end = ft_stacklast(*stacka);
-	flag = 1;
-	while (flag)
-	{
-		if (stackaux == stack_a_end)
-			flag = 0;
-		if (split == 1 && stackaux->index <= half)
-			do_push(stackb, stacka, 'b');
-		else if (split == 2 && stackaux->index > half)
-			do_push(stackb, stacka, 'b');
-		else if (stackaux->index == 0)
-			flag = 0;
-		else
-			*stacka = do_rotate(*stacka, 'a');
-		stackaux = *stacka;
-	}
-}
+#include "../push_swap.h"
 
 /*
 ** Pushes biggest or smallest from stack B to stack A, in sorted order
@@ -66,6 +38,9 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 		(*rotates)++;
 }
 
+/**
+ * 
+ */
 int	push_big_small(t_stack **stka, t_stack **stkb,
 	int min, int max, t_moves *moves)
 {
@@ -96,7 +71,10 @@ int	push_big_small(t_stack **stka, t_stack **stkb,
 	return (rotates);
 }
 
-void	find_biggest_smallest(t_stack *stk, int *min, int *max)
+/**
+ * Finds the min and max of the stack given
+ */
+void	find_min_max(t_stack *stk, int *min, int *max)
 {
 	t_stack		*tmp;
 	t_stack		*end;
@@ -114,37 +92,5 @@ void	find_biggest_smallest(t_stack *stk, int *min, int *max)
 		if (tmp == end)
 			break ;
 		tmp = tmp->next;
-	}
-}
-
-/**
- * Order a stack of between 6 and 100 
- */
-void	order_medium(t_stack **stacka, t_stack **stackb, int size)
-{
-	int		split;
-	int		rotates;
-	int		max;
-	int		min;
-	t_moves	moves;
-
-	rotates = 0;
-	split = 1;
-	while (*stacka)
-	{
-		push_median(stacka, stackb, split, (size / 2) - 1);
-		while (*stackb)
-		{
-			find_biggest_smallest(*stackb, &min, &max);
-			moves = find_moves(*stackb, min, max);
-			if (stackb && (moves.small_rotate >= 0 || moves.small_revrotate >= 0
-					|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
-				rotates += push_big_small(stacka, stackb, min, max, &moves);
-		}
-		while (--rotates)
-			*stacka = do_rotate(*stacka, 'a');
-		split++;
-		if (split == 3)
-			break ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/21 17:00:10 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:21:22 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int	check_for_max(t_stack *stk, int *array)
 {
 	int	max;
-	int	i;
 	int	*aux;
-
+	
+	max = 0;
 	aux = array;
 	if (stk)
 	{

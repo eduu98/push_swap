@@ -45,6 +45,14 @@ void	sortstack(t_stack *stk, int size);
 /* Call Algorithms function */
 void	order_small(t_stack **stka, t_stack **stkb, int size);
 void	order_medium(t_stack **stacka, t_stack **stackb, int size);
+void	order_big(t_stack **stacka, t_stack **stackb, int size);
+
+void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
+	t_moves *moves, int *rotates);
+int		push_big_small(t_stack **stka, t_stack **stkb,
+	int min, int max, t_moves *moves);
+void	find_min_max(t_stack *stk, int *min, int *max);
+
 
 /*!!!!!! PRUEBAS !!!!!!!*/
 int	ft_stackiter(t_stack *stk);

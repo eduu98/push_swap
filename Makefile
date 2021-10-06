@@ -1,9 +1,20 @@
 NAME = push_swap
 
-SRC = main.c actions.c list_functions.c args_checks.c sort.c order_small.c find_moves.c order_medium.c
+SRC = main.c actions.c list_functions.c args_checks.c sort.c find_moves.c
+SORT_SRC = aux_functions.c order_big.c order_medium.c order_small.c
 OBJ_DIR = _objFiles/
+SORT_DIR = sort_algorithm/
+ALL_SRCS = $(SRC) $(addprefix $(SORT_DIR), $(SORT_SRC))
+
 OBJ_SRC = $(SRC:.c=.o)
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_SRC))
+OBJ_SORT = $(SORT_SRC:.c=.o)
+OBJ = $(OBJ_SRC) $(OBJ_SORT)
+
+SORT_PATH = $(OBJ_SRC:%=$(SORT_DIR)%)
+SRC_PATH = $(SRC) $(SORT_PATH)
+
+SORT_OBJ_PATH =	$(addprefix $(OBJ_DIR), $(OBJ_SORT))
+OBJ_PATH =		$(addprefix $(OBJ_DIR), $(OBJ_SORT)) $(SORT_OBJ_PATH)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -27,15 +38,16 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(LIBF_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@gcc $(FLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+	@gcc $(FLAGS) $(LIBFT) $(addprefix $(OBJ_DIR), $(OBJ_SORT)) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 $(OBJ): $(SRC)
-	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
-	@gcc $(FALGS) -c $(SRC)
-	@echo $(CURSIVE)$(GRAY) "     - Moving object files to $(OBJ_DIR)..." $(NONE)
+	@echo $(CURSIVE)$(GRAY) "     - Creating object directory..." $(NONE)
 	@mkdir -p $(OBJ_DIR)
-	@mv $(OBJ_SRC) $(OBJ_DIR)
+	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
+	@gcc $(FLAGS) -c $(ALL_SRCS)
+	@echo $(CURSIVE)$(GRAY) "     - Moving object files to $(OBJ_DIR)..." $(NONE)	
+	@mv $(OBJ) $(OBJ_DIR)
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)

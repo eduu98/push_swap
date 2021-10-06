@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:41 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/09/27 14:19:47 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/04 18:40:51 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int main (int argc, char *argv[])
 				order_small(&stacka, &stackb, size);
 			else if (size <= 100)
 				order_medium(&stacka, &stackb, size);
+			else
+				
 			printf("-----------------------------\n");
 			ft_stackiter(stacka);
 			
