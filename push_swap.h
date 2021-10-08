@@ -2,7 +2,6 @@
 # define PUSH_SWAP_H
 
 #include <stdlib.h>
-#include "stdio.h"
 # include "Libft/libft.h"
 
 typedef struct s_stack
@@ -52,11 +51,5 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 int		push_big_small(t_stack **stka, t_stack **stkb,
 	int min, int max, t_moves *moves);
 void	find_min_max(t_stack *stk, int *min, int *max);
-
-
-/*!!!!!! PRUEBAS !!!!!!!*/
-int	ft_stackiter(t_stack *stk);
-
-
 
 #endif

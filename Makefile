@@ -8,7 +8,7 @@ ALL_SRCS = $(SRC) $(addprefix $(SORT_DIR), $(SORT_SRC))
 
 OBJ_SRC = $(SRC:.c=.o)
 OBJ_SORT = $(SORT_SRC:.c=.o)
-OBJ = $(OBJ_SRC) $(OBJ_SORT)
+OBJS = $(OBJ_SRC) $(OBJ_SORT)
 
 SORT_PATH = $(OBJ_SRC:%=$(SORT_DIR)%)
 SRC_PATH = $(SRC) $(SORT_PATH)
@@ -35,23 +35,23 @@ CURSIVE='\033[3m'
 # --- RULES ---
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@make -C $(LIBF_DIR)
-	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@gcc $(FLAGS) $(LIBFT) $(addprefix $(OBJ_DIR), $(OBJ_SORT)) -o $(NAME)
-	@echo $(GREEN)"- Compiled -"$(NONE)
-
-$(OBJ): $(SRC)
+$(NAME):
 	@echo $(CURSIVE)$(GRAY) "     - Creating object directory..." $(NONE)
 	@mkdir -p $(OBJ_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
 	@gcc $(FLAGS) -c $(ALL_SRCS)
 	@echo $(CURSIVE)$(GRAY) "     - Moving object files to $(OBJ_DIR)..." $(NONE)	
-	@mv $(OBJ) $(OBJ_DIR)
+	@mv $(OBJS) $(OBJ_DIR)
+	@echo $(CURSIVE)$(GRAY) "     - Compiling Libft..." $(NONE)
+	@make -C $(LIBF_DIR)
+	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
+	@gcc $(FLAGS) $(LIBFT) $(addprefix $(OBJ_DIR), $(OBJS)) -o $(NAME)
+	@echo $(GREEN)"- Compiled -"$(NONE)
+
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
-	@rm -f $(OBJ)
+	@rm -f $(OBJS)
 	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBF_DIR) clean
 	@echo "   - Clean"
