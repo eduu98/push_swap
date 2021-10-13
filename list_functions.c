@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 12:58:16 by ecruz-go          #+#    #+#             */
+/*   Updated: 2021/10/13 13:00:06 by ecruz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * Create new node for a stack
+ */
 t_stack	*ft_stacknew(int content, int index)
 {
 	t_stack	*nodo;
@@ -15,6 +30,10 @@ t_stack	*ft_stacknew(int content, int index)
 	}
 	return (nodo);
 }
+
+/**
+ * Get the last element of the stack
+ */
 t_stack	*ft_stacklast(t_stack *stck)
 {
 	if (stck)
@@ -26,6 +45,10 @@ t_stack	*ft_stacklast(t_stack *stck)
 	}
 	return (stck);
 }
+
+/**
+ * Get the previous element of the stack element given
+ */
 t_stack	*ft_stackprev(t_stack *stck, t_stack *actual)
 {
 	if (stck && stck != actual)
@@ -37,6 +60,10 @@ t_stack	*ft_stackprev(t_stack *stck, t_stack *actual)
 	}
 	return (stck);
 }
+
+/**
+ * Add a node at the end of the stack
+ */
 void	ft_stackadd_back(t_stack **stck, t_stack *new)
 {
 	t_stack	*last;
@@ -48,9 +75,4 @@ void	ft_stackadd_back(t_stack **stck, t_stack *new)
 	}
 	else
 		*stck = new;
-}
-void	ft_stackadd_front(t_stack **alst, t_stack *new)
-{
-	new->next = *alst;
-	*alst = new;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_moves.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 12:57:35 by ecruz-go          #+#    #+#             */
+/*   Updated: 2021/10/13 12:57:37 by ecruz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -19,7 +31,7 @@ int	moves_to_start(t_stack *stk, int element)
 			tmp = tmp->next;
 		}
 	}
-	return(moves);
+	return (moves);
 }
 
 /*
@@ -42,7 +54,7 @@ int	moves_to_end(t_stack *stk, int element)
 		}
 		moves++;
 	}
-	return(moves);
+	return (moves);
 }
 
 void	moves_smallest(t_stack *stk, t_moves *moves, int min)
@@ -84,17 +96,19 @@ t_moves	find_moves(t_stack *stk, int min, int max)
 	moves = (t_moves){0, 0, 0, 0, 0, 0};
 	moves_smallest(stk, &moves, min);
 	moves_biggest(stk, &moves, max);
-	if (moves.big_rotate != -1 && (moves.big_rotate >= moves.small_rotate &&
-		moves.big_rotate >= moves.small_revrotate))
+	if (moves.big_rotate != -1 && (moves.big_rotate >= moves.small_rotate
+			&& moves.big_rotate >= moves.small_revrotate))
 		moves.big_rotate = -1;
-	else if (moves.big_revrotate != -1 && (moves.big_revrotate >= moves.small_rotate &&
-		moves.big_revrotate >= moves.small_revrotate))
+	else if (moves.big_revrotate != -1
+		&& (moves.big_revrotate >= moves.small_rotate
+			&& moves.big_revrotate >= moves.small_revrotate))
 		moves.big_revrotate = -1;
-	else if (moves.small_rotate != -1 && (moves.small_rotate >= moves.big_rotate &&
-		moves.small_rotate >= moves.big_revrotate))
+	else if (moves.small_rotate != -1 && (moves.small_rotate >= moves.big_rotate
+			&& moves.small_rotate >= moves.big_revrotate))
 		moves.small_rotate = -1;
-	else if (moves.small_revrotate != -1 && (moves.small_revrotate >= moves.big_rotate &&
-		moves.small_revrotate >= moves.big_revrotate))
+	else if (moves.small_revrotate != -1
+		&& (moves.small_revrotate >= moves.big_rotate
+			&& moves.small_revrotate >= moves.big_revrotate))
 		moves.small_revrotate = -1;
 	if (moves.small_rotate != -1 || moves.small_revrotate != -1)
 		moves.small_flag = 1;

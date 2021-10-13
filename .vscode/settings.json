@@ -30,6 +30,7 @@
 		"string_view": "c",
 		"utility": "c",
 		"__string": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"unistd.h": "c"
 	}
 }
