@@ -6,13 +6,13 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:06:59 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 13:07:27 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:27:45 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <stdlib.h>
 typedef struct s_list
 {
 	void			*content;

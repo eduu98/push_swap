@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:09:28 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 13:09:29 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:53:39 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_stack	*ft_stacknew(int content, int index);
 t_stack	*ft_stacklast(t_stack *stk);
 t_stack	*ft_stackprev(t_stack *stk, t_stack *actual);
 void	ft_stackadd_back(t_stack **stk, t_stack *new);
+void	ft_stkclear(t_stack **stk);
 /* Stack Operations */
 void	do_sa(t_stack *pila, char stack_name);
 void	do_swap(t_stack *stk, char stack_name);
@@ -50,7 +51,7 @@ t_moves	find_moves(t_stack *stk, int min, int max);
 int		moves_to_end(t_stack *stk, int element);
 int		ft_do_checks(int argc, char *argv[], t_stack **stk);
 
-void	sortstack(t_stack *stk, int size);
+void	sortstack(t_stack **stk, int size);
 /* Call Algorithms function */
 void	order_small(t_stack **stka, t_stack **stkb, int size);
 void	order_medium(t_stack **stacka, t_stack **stackb, int size);

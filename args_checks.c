@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:42 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 12:51:41 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:28:39 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_do_checks(int argc, char *argv[], t_stack **stack)
 		{
 			while (*argv[1])
 			{
-				ft_stackadd_back(stack, ft_stacknew(ft_atoi(argv[1]), 0));
+				ft_stackadd_back(stack, ft_stacknew(ft_atoi_ps(argv[1]), 0));
 				while (*argv[1] != ' ' && *argv[1])
 					argv[1]++;
 				if (*argv[1])

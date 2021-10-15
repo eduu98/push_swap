@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 13:04:10 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:11:06 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,90 +16,81 @@
 int	check_for_max(t_stack *stk, int *array)
 {
 	int	max;
-	int	*aux;
 
-	max = 0;
-	aux = array;
-	if (stk)
+	max = stk->value;
+	while (stk)
 	{
-		max = stk->value;
-		while (stk->next)
-		{
-			*array = stk->value;
-			if (max < stk->value)
-				max = stk->value;
-			stk = stk->next;
-			array++;
-		}
 		*array = stk->value;
 		if (max < stk->value)
 			max = stk->value;
+		stk = stk->next;
 		array++;
-		*array = '\0';
 	}
+	*array = '\0';
 	return (max);
 }
 
 // Using counting sort to sort the elements in the basis of significant places
 void	counting_sort(int *array, int size, int place)
 {
-	int	output[size];
-	int	count[10] = {0};
+	int	*output;
+	int	count[10];
 	int	i;
 
-	i = 0;
-	while (i < size)
-	{
+	i = -1;
+	while (++i < 10)
+		count[i] = 0;
+	i = -1;
+	while (++i < size)
 		count[(array[i] / place) % 10]++;
-		i++;
-	}
-	i = 1;
-	while (i < 10)
-	{
+	i = 0;
+	while (++i < 10)
 		count[i] += count[i - 1];
-		i++;
-	}
-	i = size - 1;
-	while (i >= 0)
+	i = size;
+	output = malloc(size * sizeof(int));
+	while (--i >= 0)
 	{
 		output[count[(array[i] / place) % 10] - 1] = array[i];
 		count[(array[i] / place) % 10]--;
-		i--;
 	}
-	i = 0;
-	while (i < size)
-	{
+	i = -1;
+	while (++i < size)
 		array[i] = output[i];
-		i++;
-	}
+	free(output);
 }
 
 // Main function to implement radix sort
-void	sortstack(t_stack *stk, int size)
+void	sortstack(t_stack **stk, int size)
 {
 	int	*array;
 	int	max;
 	int	place;
+	t_stack *aux;
 
 	array = malloc(size + 1);
-	max = check_for_max(stk, array);
+	aux = *stk;
+	max = 87;
+	array[0] = 4;
+	array[1] = 67;
+	array[2] = 3;
+	array[3] = 87;
+	array[4] = 23;
+	// check_for_max(aux, array);
 	place = 1;
 	while (max / place > 0)
 	{
 		counting_sort(array, size, place);
 		place *= 10;
 	}
-	while (stk->next)
+	/*
+	while (aux)
 	{
 		place = 0;
-		while (array[place] != stk->value)
+		while (array[place] != aux->value)
 			place++;
-		stk->index = place;
-		stk = stk->next;
+		aux->index = place;
+		aux = aux->next;
 	}
-	place = 0;
-	while (array[place] != stk->value)
-		place++;
-	stk->index = place;
+	*/
 	free(array);
 }

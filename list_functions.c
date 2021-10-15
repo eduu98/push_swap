@@ -6,11 +6,12 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:58:16 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 13:00:06 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:41:41 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 /**
  * Create new node for a stack
@@ -75,4 +76,25 @@ void	ft_stackadd_back(t_stack **stck, t_stack *new)
 	}
 	else
 		*stck = new;
+}
+
+/**
+ * Suprime y libera la memoria del elemento pasado
+ * como parámetro y de todos los elementos siguientes,
+ * con free
+ * Por último, el puntero inicial debe pasar a NULL.
+*/
+void	ft_stkclear(t_stack **stk)
+{
+	t_stack	*aux;
+	t_stack	*tmp;
+
+	tmp = *stk;
+	while (tmp)
+	{
+		aux = tmp;
+		tmp = tmp->next;
+		free(aux);
+	}
+	*stk = NULL;
 }
