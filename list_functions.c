@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:58:16 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 16:41:41 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:53:53 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_stkclear(t_stack **stk)
 	{
 		aux = tmp;
 		tmp = tmp->next;
-		free(aux);
+		// free(aux);
 	}
 	*stk = NULL;
 }

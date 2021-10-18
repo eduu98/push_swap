@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:41 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 17:10:37 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:24:27 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ void	leaks(void)
 {
 	system("leaks -q push_swap");
 }
+/**
+ * Checks if the stack is ordered by default
+*/
+int	sorted(t_stack *stka)
+{
+	t_stack	*aux;
+
+	aux = stka->next;
+	while (aux)
+	{
+		if (stka->value > aux->value)
+			return (0);
+		stka = stka->next;
+		aux = aux->next;
+	}
+	return (1);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -78,23 +95,22 @@ int	main(int argc, char *argv[])
 	{
 		if (stacka && stacka->next)
 		{
+			printf("Address = %p\n", stacka);
 			size = check_duplicates(stacka);
-			if (size > 0)
+			if (size > 1 && !(sorted(stacka)))
 			{
 				sortstack(&stacka, size);
-				/*
 				if (size <= 5)
 					order_small(&stacka, &stackb, size);
 				else if (size <= 100)
 					order_medium(&stacka, &stackb, size);
 				else if (size > 100)
 					order_big(&stacka, &stackb, size);
-					*/
-				
 			}
 		}
 	}
 	ft_stackiter(stacka);
+	printf("Address = %p\n", stacka);
 	ft_stkclear(&stacka);
 	return (0);
 }

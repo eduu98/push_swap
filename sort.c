@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 17:11:06 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/15 19:38:25 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,13 @@ void	sortstack(t_stack **stk, int size)
 
 	array = malloc(size + 1);
 	aux = *stk;
-	max = 87;
-	array[0] = 4;
-	array[1] = 67;
-	array[2] = 3;
-	array[3] = 87;
-	array[4] = 23;
-	// check_for_max(aux, array);
+	max = check_for_max(aux, array);
 	place = 1;
 	while (max / place > 0)
 	{
 		counting_sort(array, size, place);
 		place *= 10;
 	}
-	/*
 	while (aux)
 	{
 		place = 0;
@@ -91,6 +84,5 @@ void	sortstack(t_stack **stk, int size)
 		aux->index = place;
 		aux = aux->next;
 	}
-	*/
 	free(array);
 }
