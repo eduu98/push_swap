@@ -95,11 +95,11 @@ int	main(int argc, char *argv[])
 	{
 		if (stacka && stacka->next)
 		{
-			printf("Address = %p\n", stacka);
 			size = check_duplicates(stacka);
 			if (size > 1 && !(sorted(stacka)))
 			{
 				sortstack(&stacka, size);
+				printf("HOLA\n");
 				if (size <= 5)
 					order_small(&stacka, &stackb, size);
 				else if (size <= 100)
@@ -110,7 +110,6 @@ int	main(int argc, char *argv[])
 		}
 	}
 	ft_stackiter(stacka);
-	printf("Address = %p\n", stacka);
 	ft_stkclear(&stacka);
 	return (0);
 }

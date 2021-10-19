@@ -94,7 +94,7 @@ void	ft_stkclear(t_stack **stk)
 	{
 		aux = tmp;
 		tmp = tmp->next;
-		// free(aux);
+		free(aux);
 	}
 	*stk = NULL;
 }

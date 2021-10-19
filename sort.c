@@ -67,7 +67,7 @@ void	sortstack(t_stack **stk, int size)
 	int	place;
 	t_stack *aux;
 
-	array = malloc(size + 1);
+	array = malloc(size * sizeof(int));
 	aux = *stk;
 	max = check_for_max(aux, array);
 	place = 1;
