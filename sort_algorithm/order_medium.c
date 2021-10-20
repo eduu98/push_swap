@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/06 13:25:49 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:29:13 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,21 @@ void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 {
 	int		turns;
 	int		rotates;
-	int		max;
-	int		min;
 	t_moves	moves;
 
 	rotates = 0;
 	turns = 1;
+	moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 	while (*stacka)
 	{
 		push_median(stacka, stackb, turns, (size / 2) - 1);
 		while (*stackb)
 		{
-			find_min_max(*stackb, &min, &max);
-			moves = find_moves(*stackb, min, max);
+			find_min_max(*stackb, &moves);
+			find_moves(*stackb, &moves);
 			if (stackb && (moves.small_rotate >= 0 || moves.small_revrotate >= 0
 					|| moves.big_rotate >= 0 || moves.big_revrotate >= 0))
-				rotates += push_big_small(stacka, stackb, min, max, &moves);
+				rotates += push_big_small(stacka, stackb, &moves);
 		}
 		while (--rotates)
 			*stacka = do_rotate(*stacka, 'a');

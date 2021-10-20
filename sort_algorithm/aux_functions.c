@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:09:53 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/13 13:01:20 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:28:38 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 /**
  * 
  */
-int	push_big_small(t_stack **stka, t_stack **stkb,
-	int min, int max, t_moves *moves)
+int	push_big_small(t_stack **stka, t_stack **stkb, t_moves *moves)
 {
 	t_stack	*stkaux;
 	t_stack	*stkb_end;
@@ -55,9 +54,9 @@ int	push_big_small(t_stack **stka, t_stack **stkb,
 	flag = 1;
 	while (flag)
 	{		
-		while (stkaux->index != min && stkaux->index != max)
+		while (stkaux->index != moves->min && stkaux->index != moves->max)
 			stkaux = stkaux->next;
-		if (stkaux->index == min || stkaux->index == max)
+		if (stkaux->index == moves->min || stkaux->index == moves->max)
 		{
 			rotate_and_push_to_a(stka, stkb, moves, &rotates);
 			flag = 0;
@@ -74,21 +73,21 @@ int	push_big_small(t_stack **stka, t_stack **stkb,
 /**
  * Finds the min and max of the stack given
  */
-void	find_min_max(t_stack *stk, int *min, int *max)
+void	find_min_max(t_stack *stk, t_moves *moves)
 {
 	t_stack		*tmp;
 	t_stack		*end;
 
 	tmp = stk;
 	end = ft_stacklast(stk);
-	*min = stk->index;
-	*max = *min;
+	moves->min = stk->index;
+	moves->max = stk->index;
 	while (1)
 	{
-		if (tmp->index <= *min)
-			*min = tmp->index;
-		if (tmp->index > *max)
-			*max = tmp->index;
+		if (tmp->index <= moves->min)
+			moves->min = tmp->index;
+		if (tmp->index > moves->max)
+			moves->max = tmp->index;
 		if (tmp == end)
 			break ;
 		tmp = tmp->next;

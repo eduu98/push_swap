@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 19:38:25 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:15:15 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	counting_sort(int *array, int size, int place)
 // Main function to implement radix sort
 void	sortstack(t_stack **stk, int size)
 {
-	int	*array;
-	int	max;
-	int	place;
-	t_stack *aux;
+	int		*array;
+	int		max;
+	int		place;
+	t_stack	*aux;
 
 	array = malloc(size * sizeof(int));
 	aux = *stk;

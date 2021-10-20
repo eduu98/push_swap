@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:41 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/18 13:24:27 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:15:35 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	leaks(void)
 {
 	system("leaks -q push_swap");
 }
+
 /**
  * Checks if the stack is ordered by default
 */

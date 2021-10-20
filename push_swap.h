@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:09:28 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 16:53:39 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:28:16 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_moves
 	int	big_revrotate;
 	int	small_flag;
 	int	big_flag;
+	int	min;
+	int	max;
 }	t_moves;
 
 /* Stack Basic Functions */
@@ -47,7 +49,7 @@ t_stack	*do_rotate(t_stack *stk, char stack_name);
 t_stack	*do_reverse_rotate(t_stack *stk, char stack_name);
 
 /* Moves to make*/
-t_moves	find_moves(t_stack *stk, int min, int max);
+void	find_moves(t_stack *stk, t_moves *moves);
 int		moves_to_end(t_stack *stk, int element);
 int		ft_do_checks(int argc, char *argv[], t_stack **stk);
 
@@ -59,8 +61,7 @@ void	order_big(t_stack **stacka, t_stack **stackb, int size);
 
 void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 			t_moves *moves, int *rotates);
-int		push_big_small(t_stack **stka, t_stack **stkb,
-			int min, int max, t_moves *moves);
-void	find_min_max(t_stack *stk, int *min, int *max);
+int		push_big_small(t_stack **stka, t_stack **stkb, t_moves *moves);
+void	find_min_max(t_stack *stk, t_moves *moves);
 
 #endif
