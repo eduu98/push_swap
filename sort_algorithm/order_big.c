@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:06:07 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 12:23:10 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:13:44 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	order_big(t_stack **stacka, t_stack **stackb, int size)
 
 	rotates = 0;
 	turns = 1;
-	moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 	while (*stacka)
 	{
 		push_quarters(stacka, stackb, turns, size);
+		moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 		while (*stackb)
 		{
 			find_min_max(*stackb, &moves);

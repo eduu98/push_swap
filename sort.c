@@ -6,83 +6,73 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 11:15:15 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:08:18 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-int	check_for_max(t_stack *stk, int *array)
+/**
+ * Puts the numbers of the stack in an auxiliary array
+ */
+void	create_array(int **array, t_stack *aux, int size)
 {
-	int	max;
+	int	i;
+	int	*tmp;
 
-	max = stk->value;
-	while (stk)
+	i = 0;
+	tmp = *array;
+	while (i < size)
 	{
-		*array = stk->value;
-		if (max < stk->value)
-			max = stk->value;
-		stk = stk->next;
-		array++;
+		tmp[i] = aux->value;
+		aux = aux->next;
+		i++;
 	}
-	*array = '\0';
-	return (max);
 }
 
-// Using counting sort to sort the elements in the basis of significant places
-void	counting_sort(int *array, int size, int place)
+/**
+ * Put the correct index of each number of the stack
+ */
+void	put_index(int *array, t_stack *aux)
 {
-	int	*output;
-	int	count[10];
 	int	i;
 
-	i = -1;
-	while (++i < 10)
-		count[i] = 0;
-	i = -1;
-	while (++i < size)
-		count[(array[i] / place) % 10]++;
-	i = 0;
-	while (++i < 10)
-		count[i] += count[i - 1];
-	i = size;
-	output = malloc(size * sizeof(int));
-	while (--i >= 0)
+	while (aux)
 	{
-		output[count[(array[i] / place) % 10] - 1] = array[i];
-		count[(array[i] / place) % 10]--;
+		i = 0;
+		while (array[i] != aux->value)
+			i++;
+		aux->index = i;
+		aux = aux->next;
 	}
-	i = -1;
-	while (++i < size)
-		array[i] = output[i];
-	free(output);
 }
 
-// Main function to implement radix sort
+/**
+ * Creates an auxiliary array an order it
+ * to have the proper index of each element
+ * of the stack
+ */
 void	sortstack(t_stack **stk, int size)
 {
 	int		*array;
-	int		max;
-	int		place;
-	t_stack	*aux;
+	long	tmp;
+	int		i;
 
-	array = malloc(size * sizeof(int));
-	aux = *stk;
-	max = check_for_max(aux, array);
-	place = 1;
-	while (max / place > 0)
+	tmp = 0;
+	array = malloc((size + 1) * sizeof(int));
+	create_array(&array, *stk, size);
+	i = 0;
+	while (i < size - 1)
 	{
-		counting_sort(array, size, place);
-		place *= 10;
+		if (array[i] <= array[i + 1])
+			i++;
+		else
+		{
+			tmp = array[i];
+			array[i] = array[i + 1];
+			array[i + 1] = tmp;
+			i = 0;
+		}
 	}
-	while (aux)
-	{
-		place = 0;
-		while (array[place] != aux->value)
-			place++;
-		aux->index = place;
-		aux = aux->next;
-	}
+	put_index(array, *stk);
 	free(array);
 }

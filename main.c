@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:41 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 11:15:35 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:09:56 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * Checks if there are duplicates in the stack,
  * if they are returns -1, else returns the
  * number of elements in the stack
-*/
+ */
 int	check_duplicates(t_stack *stk)
 {
 	int		count;
@@ -43,31 +43,9 @@ int	check_duplicates(t_stack *stk)
 	return (count);
 }
 
-int	ft_stackiter(t_stack *stk)
-{
-	int	count;
-
-	count = 0;
-	if (stk)
-	{
-		while (stk)
-		{
-			printf("Value: %d || Order %d\n", stk->value, stk->index);
-			stk = stk->next;
-			count++;
-		}
-	}
-	return (count);
-}
-
-void	leaks(void)
-{
-	system("leaks -q push_swap");
-}
-
 /**
  * Checks if the stack is ordered by default
-*/
+ */
 int	sorted(t_stack *stka)
 {
 	t_stack	*aux;
@@ -83,6 +61,9 @@ int	sorted(t_stack *stka)
 	return (1);
 }
 
+/**
+ * Main function of push swap program
+ */
 int	main(int argc, char *argv[])
 {
 	t_stack	*stacka;
@@ -91,7 +72,6 @@ int	main(int argc, char *argv[])
 
 	stacka = NULL;
 	stackb = NULL;
-	atexit(leaks);
 	if (ft_do_checks(argc, argv, &stacka))
 	{
 		if (stacka && stacka->next)
@@ -100,7 +80,6 @@ int	main(int argc, char *argv[])
 			if (size > 1 && !(sorted(stacka)))
 			{
 				sortstack(&stacka, size);
-				printf("HOLA\n");
 				if (size <= 5)
 					order_small(&stacka, &stackb, size);
 				else if (size <= 100)
@@ -110,7 +89,6 @@ int	main(int argc, char *argv[])
 			}
 		}
 	}
-	ft_stackiter(stacka);
 	ft_stkclear(&stacka);
 	return (0);
 }

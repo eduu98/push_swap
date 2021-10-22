@@ -6,12 +6,11 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:04:42 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/15 15:28:39 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:13:45 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 #include "push_swap.h"
 
 /**

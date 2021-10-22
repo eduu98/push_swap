@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:23:05 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 11:29:13 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:13:28 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	order_medium(t_stack **stacka, t_stack **stackb, int size)
 
 	rotates = 0;
 	turns = 1;
-	moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 	while (*stacka)
 	{
 		push_median(stacka, stackb, turns, (size / 2) - 1);
+		moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 		while (*stackb)
 		{
 			find_min_max(*stackb, &moves);

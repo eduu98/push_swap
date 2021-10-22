@@ -6,12 +6,11 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:58:16 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/18 12:53:53 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:13:50 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 /**
  * Create new node for a stack

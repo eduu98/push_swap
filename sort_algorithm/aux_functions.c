@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:09:53 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 11:28:38 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:12:55 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 		*stka = do_rotate(*stka, 'a');
 	if (moves->big_flag || !*stkb)
 		(*rotates)++;
+	*moves = (t_moves){0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 /**

@@ -6,15 +6,15 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:57:35 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 12:25:29 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:12:55 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-** Calculates number of moves to top of stack
-*/
+ * Calculates number of moves to top of stack
+ */
 
 int	moves_to_start(t_stack *stk, int element)
 {
@@ -34,9 +34,9 @@ int	moves_to_start(t_stack *stk, int element)
 	return (moves);
 }
 
-/*
-** Calculates moves to bottom of stack
-*/
+/**
+ * Calculates moves to bottom of stack
+ */
 
 int	moves_to_end(t_stack *stk, int element)
 {
