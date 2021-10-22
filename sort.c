@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 12:14:32 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/22 12:08:18 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:18:08 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	sortstack(t_stack **stk, int size)
 
 	tmp = 0;
 	array = malloc((size + 1) * sizeof(int));
+	if (!array)
+		ft_print_error();
 	create_array(&array, *stk, size);
 	i = 0;
 	while (i < size - 1)

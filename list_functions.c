@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:58:16 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/22 11:13:50 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:17:56 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_stack	*ft_stacknew(int content, int index)
 	t_stack	*nodo;
 
 	nodo = malloc(sizeof(t_stack));
+	if (!nodo)
+		ft_print_error();
 	if (nodo == NULL)
 		return (NULL);
 	else

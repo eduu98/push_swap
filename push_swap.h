@@ -6,7 +6,7 @@
 /*   By: ecruz-go <ecruz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:09:28 by ecruz-go          #+#    #+#             */
-/*   Updated: 2021/10/20 11:28:16 by ecruz-go         ###   ########.fr       */
+/*   Updated: 2021/10/22 12:17:35 by ecruz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	rotate_and_push_to_a(t_stack **stka, t_stack **stkb,
 			t_moves *moves, int *rotates);
 int		push_big_small(t_stack **stka, t_stack **stkb, t_moves *moves);
 void	find_min_max(t_stack *stk, t_moves *moves);
+void	ft_print_error(void);
 
 #endif
